@@ -2,8 +2,9 @@
   "name": "node-session",
   "version": "1.0.0",
   "description": "Node.js http server that creates sessions",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "run": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rob Benton rob.benton7@gmail.com",
