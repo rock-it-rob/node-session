@@ -18,10 +18,7 @@ app.use('/', indexRouter)
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 app.use(session({
-  //genid
-  cookie: {
-    httpOnly: false // Only for testing
-  },
+  //genid should be added here
   name: 'viewSession',
   resave: false,
   saveUninitialized: false,

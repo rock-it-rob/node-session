@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <td>Session ID:</td>
-      <td><span id="session-id"/></td>
+      <td><span id="session-id"></span></td>
     </tr>
   </table>
 </body>
@@ -34,7 +34,12 @@ function createSession()
 {
   $.ajax({
     type: 'POST',
-    url: '/session'
+    url: '/session',
+    statusCode: {
+      200: function(data) {
+        $("#session-id").text(data.sessionId)
+      }
+    }
   });
 }
 
@@ -42,7 +47,12 @@ function deleteSession()
 {
   $.ajax({
     type: 'DELETE',
-    url: '/session'
+    url: '/session',
+    statusCode: {
+      200: function() {
+        $("#session-id").text(null)
+      }
+    }
   });
 }
 </script>
