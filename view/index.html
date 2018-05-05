@@ -26,6 +26,10 @@
       <td>Session ID:</td>
       <td><span id="session-id"></span></td>
     </tr>
+    <tr>
+      <td><button onclick="accessCheck()">Access Check</button></td>
+      <td><span id="access-check"></span></td>
+    </tr>
   </table>
 </body>
 
@@ -54,6 +58,16 @@ function deleteSession()
       }
     }
   });
+}
+
+function accessCheck()
+{
+  $.ajax({
+    type: 'GET',
+    url: '/protected'
+  }).always(function(data, status) {
+    $("#access-check").text(status)
+  })
 }
 </script>
 

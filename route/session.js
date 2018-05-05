@@ -8,7 +8,7 @@
  // POST creates a new session. Response contains a json object with a key of
  // 'sessionId'.
  .post(function(req, res) {
-   req.session.exists = true
+   req.session.granted = true
    console.log('creating session ' + req.session.id)
    var data = { sessionId: req.session.id }
    res.send(data)

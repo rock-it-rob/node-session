@@ -35,6 +35,13 @@ app.use(session({
 const sessionRouter = require('./route/session.js')
 app.use('/session', sessionRouter)
 
+// Set up a protected route only accessible with a valid session.
+const protectedRouter = require('./route/protected.js')
+app.use('/protected', protectedRouter)
+app.get('/protected', function(req, res) {
+  res.end()
+})
+
 // Set the default router.
 const defaultRouter = require('./route/default')
 app.use(defaultRouter)
