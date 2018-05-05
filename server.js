@@ -9,10 +9,6 @@ app.use('/css', express.static("static/css"))
 const indexRouter = require('./route/index')
 app.use('/', indexRouter)
 
-// Set the default router.
-const defaultRouter = require('./route/default')
-app.use(defaultRouter)
-
 // Initialize sessions.
 /**
  * NOTE: According to the connect-redis project page we may need to anticipate
@@ -25,7 +21,7 @@ app.use(session({
   //genid
   cookie: {
     httpOnly: false // Only for testing
-  }
+  },
   name: 'viewSession',
   resave: false,
   saveUninitialized: false,
@@ -35,8 +31,16 @@ app.use(session({
     host: 'localhost', // config file needed
     port: 6379 // config file needed
   }),
-  unset: destroy
+  unset: 'destroy'
 }))
+
+// Set the router for handling session requests.
+const sessionRouter = require('./route/session.js')
+app.use('/session', sessionRouter)
+
+// Set the default router.
+const defaultRouter = require('./route/default')
+app.use(defaultRouter)
 
 // Start the server.
 app.listen(3000)

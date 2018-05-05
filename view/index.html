@@ -16,11 +16,11 @@
   <table>
     <tr>
       <td>Create New Session</td>
-      <td><button>Make</button></td>
+      <td><button onclick='createSession()'>Make</button></td>
     </tr>
     <tr>
       <td>Delete Existing Session</td>
-      <td><button>Destroy</button></td>
+      <td><button onclick='deleteSession()'>Destroy</button></td>
     </tr>
     <tr>
       <td>Session ID:</td>
@@ -28,5 +28,23 @@
     </tr>
   </table>
 </body>
+
+<script>
+function createSession()
+{
+  $.ajax({
+    type: 'POST',
+    url: '/session'
+  });
+}
+
+function deleteSession()
+{
+  $.ajax({
+    type: 'DELETE',
+    url: '/session'
+  });
+}
+</script>
 
 </html>
