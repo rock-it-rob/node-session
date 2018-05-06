@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 // Enable static routing.
-app.use('/css', express.static("site/static/css"))
+app.use('/css', express.static("site/public/css"))
 
 // Set the router for the main page.
 const indexRouter = require('./route/index')
