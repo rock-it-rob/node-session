@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Login</title>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+</head>
+
+<body>
+  <h1>Log in to access site</h1>
+  <table>
+    <tr>
+      <td><button onclick="login()">Log In</button></td>
+    </tr>
+  </table>
+</body>
+
+<script>
+function login() {
+  $.ajax({
+    type: 'POST',
+    url: '/session',
+    statusCode: {
+      200: function() {
+        window.location = '/';
+      }
+    }
+  })
+}
+</script>
+
+</html>

@@ -5,10 +5,6 @@ const app = express()
 // Enable static routing.
 app.use('/css', express.static("site/public/css"))
 
-// Set the router for the main page.
-const indexRouter = require('./route/index')
-app.use('/', indexRouter)
-
 // Initialize sessions.
 /**
  * NOTE: According to the connect-redis project page we may need to anticipate
@@ -35,14 +31,19 @@ app.use(session({
 const sessionRouter = require('./route/session.js')
 app.use('/session', sessionRouter)
 
-// Set up a protected route only accessible with a valid session.
-const protectedRouter = require('./route/protected.js')
-app.use('/protected', protectedRouter)
-app.get('/protected', function(req, res) {
-  res.end()
+// Set the route to the login page.
+app.get('/login', function(req, res) {
+  res.sendFile('login.html', { root: __dirname + '/view' })
 })
 
-// Set the default router.
+// Set the router for the main page. Use the protected router as middleware
+// for session verification.
+const indexRouter = require('./route/index')
+const protectedRouter = require('./route/protected.js')
+app.use('/', protectedRouter)
+app.use('/', indexRouter)
+
+// Set the default router that sends 404s.
 const defaultRouter = require('./route/default')
 app.use(defaultRouter)
 

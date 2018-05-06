@@ -13,12 +13,8 @@
 // valid session. If present the request is forwarded to the subsequent handler.
 // If not present a 401 response is returned.
  router.all('*', function(req, res, next) {
-   if (req.session.granted != true) {
-     res.sendStatus(401)
-   }
-   else {
-     next()
-   }
+   if (req.session.granted == true) next()
+   else res.sendStatus(401)
  })
 
 module.exports = router
